@@ -1,0 +1,1287 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-display: var(--font-display);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Portfolio design tokens */
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-sage: var(--sage);
+  --color-sage-deep: var(--sage-deep);
+  --color-sage-soft: var(--sage-soft);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-highlight: var(--accent-highlight);
+  --color-accent-gold: var(--accent-gold);
+  --color-faint: var(--faint);
+  --color-background-secondary: var(--background-secondary);
+  --color-muted-blue: var(--muted-blue);
+  --color-muted-purple: var(--muted-purple);
+  --color-hairline: var(--hairline);
+
+  /* One shadow language for the whole site (theme-aware values below) */
+  --shadow-e1: var(--shadow-e1);
+  --shadow-e2: var(--shadow-e2);
+  --shadow-e3: var(--shadow-e3);
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   LIGHT THEME — "Warm Editorial Cream"
+   CREAM is the main color of the system: warm cream canvas, clear white
+   glass, charcoal ink, warm bronze details. NO green anywhere in the UI —
+   the only aqua on the site lives inside the buttons as CLEAR WATER
+   (--water-* tokens), reading as water, never as paint.
+   Hierarchy: cream bg → white glass → charcoal ink → bronze details →
+   clear water inside buttons only.
+   ──────────────────────────────────────────────────────────────────────────── */
+:root {
+  --radius: 0.625rem;
+
+  --background: #f4efe6; /* warm cream — the star of the system */
+  --background-secondary: #eee7da;
+  --foreground: #302b25; /* dark chocolate charcoal */
+  --card: #f8f4ec; /* warm paper card surface */
+  --card-foreground: #302b25;
+  --popover: #f8f4ec;
+  --popover-foreground: #302b25;
+  --primary: #302b25; /* dark chocolate ink — the strong neutral */
+  --primary-foreground: #f6f1e7; /* warm cream */
+  --secondary: rgba(238, 231, 218, 0.72);
+  --secondary-foreground: #4a4339;
+  --muted: #eee7da;
+  --muted-foreground: #6f665c; /* warm taupe — solid, readable labels (4.9:1) */
+  --accent: #a88352; /* muted bronze — fills, active pills, lines */
+  --accent-foreground: #fff9f0; /* warm white on bronze */
+  --destructive: #a63d2f;
+  --border: rgba(139, 120, 95, 0.34); /* warm taupe border (~#d8cfc1 on cream) */
+  --input: rgba(139, 120, 95, 0.4);
+  --ring: rgba(168, 131, 82, 0.55);
+  --chart-1: #a88352;
+  --chart-2: #7c8875;
+  --chart-3: #c2a05f;
+  --chart-4: #91887c;
+  --chart-5: #a63d2f;
+  --sidebar: #f8f4ec;
+  --sidebar-foreground: #302b25;
+  --sidebar-primary: #302b25;
+  --sidebar-primary-foreground: #f6f1e7;
+  --sidebar-accent: #eee7da;
+  --sidebar-accent-foreground: #4a4339;
+  --sidebar-border: rgba(139, 120, 95, 0.28);
+  --sidebar-ring: rgba(168, 131, 82, 0.55);
+
+  /* Portfolio tokens */
+  --ink: #302b25; /* headings — dark chocolate, opacity 1 always */
+  --ink-soft: #5e564a; /* solid body text — warm taupe-charcoal (6.3:1) */
+  --surface: #f8f4ec;
+  --surface-foreground: #302b25;
+  --faint: #7e7567; /* third text level — muted but readable (~4:1) */
+  --accent-soft: #f0e6d2; /* champagne wash for gentle hovers */
+  --accent-deep: #86683c; /* bronze TEXT — always solid, 4.5:1 on cream */
+  --accent-highlight: #c2a05f;
+  --accent-gold: #b8955a; /* champagne details only — never dominant */
+  --sage: #7c8875; /* soft sage — secondary accent, tiny areas only */
+  --sage-deep: #5f6b59; /* readable sage text */
+  --sage-soft: #e6e7da; /* pale sage wash */
+  --muted-blue: #6f665c; /* legacy token — now warm taupe (hero subtitle) */
+  --muted-purple: #97897b; /* warm taupe (legacy token name) */
+  --hairline: rgba(139, 120, 95, 0.24);
+  --signature-ink: #302b25;
+
+  /* Glass language — warm paper/ceramic surfaces, soft borders, gentle
+     blur. Premium paper rather than transparent white boxes. */
+  --glass-bg: rgba(248, 244, 236, 0.78);
+  --glass-bg-strong: rgba(248, 244, 236, 0.92);
+  --glass-border: rgba(139, 120, 95, 0.3);
+  --glass-border-hover: rgba(168, 131, 82, 0.5);
+  --glass-shadow: 0 10px 30px rgba(92, 72, 48, 0.07);
+
+  /* Liquid glass capsule buttons — transparent crystal glass sealing a
+     small mass of cyan→deep-blue water. The liquid lives ONLY inside the
+     button capsule; page surfaces are never painted with it. The dark
+     theme re-tunes the same physical system below (smoked glass +
+     electric blue water). */
+  --btn-glass: rgba(236, 249, 255, 0.36); /* CLEAR crystal — the page shows through */
+  --btn-glass-hover: rgba(246, 252, 255, 0.48);
+  /* Real water: translucent at the meniscus, deepening with depth — clearly
+     visible cyan/blue like the reference, yet the glass behind still shows
+     through the upper body of the liquid (transparent, not painted-on). */
+  --water-1: rgba(56, 198, 240, 0.52); /* surface cyan — visible meniscus */
+  --water-2: rgba(28, 138, 220, 0.74); /* mid blue — translucent body */
+  --water-3: rgba(8, 76, 190, 0.92); /* deep water at the base */
+  --water-highlight: rgba(224, 250, 255, 0.92); /* surface tension light */
+  --water-shadow: rgba(10, 44, 104, 0.32); /* volume under the surface */
+  --water-border: rgba(96, 186, 232, 0.68); /* glass rim */
+  --water-border-hover: rgba(56, 176, 232, 0.88);
+  --water-ink: #0f2f5c; /* dark navy label on crystal glass */
+  --lq-glass-hi: rgba(255, 255, 255, 0.52); /* upper crystal body — bright glass */
+  --lq-glass-lo: rgba(222, 243, 253, 0.18); /* lower crystal body — see-through */
+  --lq-rim-top: rgba(255, 255, 255, 0.98); /* bright top edge light */
+  --lq-rim-bottom: rgba(64, 180, 236, 0.88); /* cyan lower edge reflection */
+  --lq-gloss: rgba(255, 255, 255, 0.72); /* specular reflections */
+  --lq-glow-rest: rgba(50, 168, 228, 0.34); /* resting under-glow */
+  --lq-glow-hover: rgba(52, 190, 246, 0.55); /* hover under-glow */
+  --lq-bubble: rgba(230, 250, 255, 0.85); /* bubbles inside the water */
+  --lq-caustic: rgba(220, 248, 255, 0.62); /* refracted light patches in the water */
+  --lq-sheen: rgba(255, 255, 255, 0.6); /* moving glass reflection */
+  /* Realism layer — physical depth refinements. Every tone is derived from
+     the SAME water/glass family above (ice whites + the existing blues):
+     bevel light, glass wall line, ceiling reflection, sub-surface meniscus
+     scatter, floor light under the water, grounded contact shadow. */
+  --lq-bevel-hi: rgba(255, 255, 255, 0.95); /* bevel light, top-left */
+  --lq-bevel-lo: rgba(56, 150, 212, 0.5); /* bevel shade, bottom-right */
+  --lq-wall: rgba(255, 255, 255, 0.6); /* inner glass wall line — thickness */
+  --lq-ceiling: rgba(255, 255, 255, 0.4); /* ceiling reflection in upper glass */
+  --lq-meniscus: rgba(224, 250, 255, 0.8); /* scatter just under the waterline */
+  --lq-floor: rgba(110, 214, 250, 0.6); /* light exiting the glass floor */
+  --lq-contact: rgba(15, 40, 70, 0.26); /* grounded contact shadow */
+  --lq-inner-shade: rgba(23, 64, 98, 0.16); /* inner glass occlusion bevel */
+  --lq-cap-hi: rgba(255, 255, 255, 0.3); /* curved cap light on the side walls */
+  --lq-ink-relief: 0 1px 0 rgba(255, 255, 255, 0.35); /* label seated on glass */
+
+  /* Unified shadow system — warm separation, not drama */
+  --shadow-e1: 0 4px 16px rgba(92, 72, 48, 0.05);
+  --shadow-e2: 0 8px 28px rgba(92, 72, 48, 0.07);
+  --shadow-e3: 0 16px 45px rgba(92, 72, 48, 0.09);
+
+  /* Aurora ambient light field — WARM atmosphere behind everything.
+     Light theme: champagne / bronze / sage / beige whispers over the cream
+     canvas (effective opacity 0.025–0.07) — the cream stays the star. */
+  --aurora-1: rgba(196, 164, 110, 0.055); /* warm champagne */
+  --aurora-2: rgba(168, 131, 82, 0.045); /* muted bronze */
+  --aurora-3: rgba(124, 136, 117, 0.042); /* soft sage */
+  --aurora-4: rgba(190, 172, 140, 0.05); /* warm beige */
+
+  color-scheme: light;
+}
+
+/* ────────────────────────────────────────────────────────────────────────────
+   DARK THEME — "Midnight Atelier" (its own intentional design, not an inversion)
+   Deep navy espresso, warm ivory text, brighter amber, muted blue & purple.
+   ──────────────────────────────────────────────────────────────────────────── */
+.dark {
+  --background: #141922;
+  --foreground: #efe9dc;
+  --card: #1b2130;
+  --card-foreground: #efe9dc;
+  --popover: #1b2130;
+  --popover-foreground: #efe9dc;
+  --primary: #efe9dc;
+  --primary-foreground: #171c27;
+  --secondary: #232b3d;
+  --secondary-foreground: #e6dfcf;
+  --muted: #232b3d;
+  --muted-foreground: #a49c8d;
+  --accent: #d9a852;
+  --accent-foreground: #201807;
+  --destructive: #e06a56;
+  --border: rgba(239, 233, 220, 0.13);
+  --input: rgba(239, 233, 220, 0.18);
+  --ring: rgba(217, 168, 82, 0.6);
+  --chart-1: #d9a852;
+  --chart-2: #8fa6c4;
+  --chart-3: #a99bb8;
+  --chart-4: #9db789;
+  --chart-5: #e0876f;
+  --sidebar: #1b2130;
+  --sidebar-foreground: #efe9dc;
+  --sidebar-primary: #d9a852;
+  --sidebar-primary-foreground: #201807;
+  --sidebar-accent: #232b3d;
+  --sidebar-accent-foreground: #e6dfcf;
+  --sidebar-border: rgba(239, 233, 220, 0.13);
+  --sidebar-ring: rgba(217, 168, 82, 0.6);
+
+  --ink: #f3edde;
+  --ink-soft: #c9c2b3; /* solid warm ivory for body text on dark */
+  --surface: #1b2130;
+  --faint: #a49c8d;
+  --accent-soft: rgba(217, 168, 82, 0.14);
+  --accent-deep: #e7bd6e;
+  --accent-highlight: #e7bd6e;
+  --accent-gold: #d9a852;
+  --sage: #9ba78e; /* soft sage — dark equivalent */
+  --sage-deep: #b6c1a8;
+  --sage-soft: rgba(155, 167, 142, 0.14);
+  --muted-blue: #8fa6c4;
+  --muted-purple: #a99bb8;
+  --hairline: rgba(239, 233, 220, 0.09);
+  --background-secondary: #10141c;
+  --signature-ink: #ece7da;
+
+  --glass-bg: rgba(27, 33, 48, 0.66);
+  --glass-bg-strong: rgba(27, 33, 48, 0.82);
+  --glass-border: rgba(239, 233, 220, 0.1);
+  --glass-border-hover: rgba(217, 168, 82, 0.35);
+  --glass-shadow: 0 22px 60px -28px rgba(0, 0, 0, 0.65);
+
+  --shadow-e1: 0 4px 16px rgba(0, 0, 0, 0.25);
+  --shadow-e2: 0 8px 28px rgba(0, 0, 0, 0.35);
+  --shadow-e3: 0 16px 45px rgba(0, 0, 0, 0.5);
+
+  /* Aurora ambient light field — dark theme lets the atmosphere breathe
+     with warm amber/bronze plus the theme's own muted blue/mauve notes —
+     heavily diffused, cinematic, never neon. */
+  --aurora-1: rgba(217, 168, 82, 0.1); /* warm amber */
+  --aurora-2: rgba(143, 166, 196, 0.08); /* muted slate blue */
+  --aurora-3: rgba(169, 155, 184, 0.07); /* muted mauve */
+  --aurora-4: rgba(150, 160, 140, 0.07); /* sage gray */
+
+  /* Liquid glass capsule buttons — dark smoked glass sealing vivid
+     electric blue/cyan water. Identical physical construction to light
+     mode; only the materials are re-tuned for the night theme. */
+  --btn-glass: rgba(11, 17, 32, 0.55);
+  --btn-glass-hover: rgba(16, 25, 46, 0.64);
+  /* Electric blue water on smoked glass: the liquid itself glows against
+     the deep navy interior — the reference's night-mode material. */
+  --water-1: rgba(96, 222, 255, 0.55); /* luminous meniscus */
+  --water-2: rgba(36, 152, 255, 0.8); /* electric mid body */
+  --water-3: rgba(16, 92, 240, 0.95); /* deep electric base */
+  --water-highlight: rgba(180, 245, 255, 0.95);
+  --water-shadow: rgba(1, 12, 44, 0.6);
+  --water-border: rgba(122, 205, 255, 0.55);
+  --water-border-hover: rgba(150, 226, 255, 0.8);
+  --water-ink: #eaf6ff;
+  --lq-glass-hi: rgba(150, 200, 250, 0.22); /* smoked upper body */
+  --lq-glass-lo: rgba(10, 18, 38, 0.5); /* deep smoked lower body */
+  --lq-rim-top: rgba(205, 242, 255, 0.65); /* cold top edge light */
+  --lq-rim-bottom: rgba(80, 208, 255, 0.9); /* electric lower edge */
+  --lq-gloss: rgba(200, 240, 255, 0.42);
+  --lq-glow-rest: rgba(48, 172, 255, 0.45);
+  --lq-glow-hover: rgba(64, 196, 255, 0.65);
+  --lq-bubble: rgba(190, 240, 255, 0.85);
+  --lq-caustic: rgba(160, 235, 255, 0.6); /* refracted light in the water */
+  --lq-sheen: rgba(220, 245, 255, 0.38);
+  /* Realism layer — night re-tune of the same physical tones (all derived
+     from the existing dark rim/glow/highlight family above). */
+  --lq-bevel-hi: rgba(205, 242, 255, 0.5); /* cold bevel light, top-left */
+  --lq-bevel-lo: rgba(80, 208, 255, 0.42); /* electric bevel shade, bottom-right */
+  --lq-wall: rgba(160, 220, 255, 0.3); /* inner glass wall line */
+  --lq-ceiling: rgba(200, 240, 255, 0.24); /* ceiling reflection */
+  --lq-meniscus: rgba(180, 245, 255, 0.75); /* scatter under the waterline */
+  --lq-floor: rgba(64, 196, 255, 0.62); /* light exiting the glass floor */
+  --lq-contact: rgba(0, 0, 0, 0.5); /* grounded contact shadow on navy */
+  --lq-inner-shade: rgba(0, 0, 0, 0.38); /* inner glass occlusion bevel */
+  --lq-cap-hi: rgba(160, 220, 255, 0.14); /* curved cap light on the side walls */
+  --lq-ink-relief: 0 1px 2px rgba(0, 0, 0, 0.4); /* label seated on smoked glass */
+
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01" on, "cv01" on;
+    /* Crisp editorial ink — no subpixel smearing, no synthetic blur */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-foreground);
+  }
+
+  h1, h2, h3, h4 {
+    @apply text-ink;
+    font-family: var(--font-display), Georgia, "Times New Roman", serif;
+    font-optical-sizing: auto;
+  }
+
+  /* Keyboard users always get a clear focus state */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Refined thin scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--muted-foreground) 35%, transparent);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in oklab, var(--accent) 60%, transparent);
+    background-clip: content-box;
+  }
+}
+
+/* ── Editorial utilities ─────────────────────────────────────────────────── */
+
+@utility font-display {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  font-optical-sizing: auto;
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+/* Glass surface used by navbar / cards — one glass language everywhere.
+   Clear and visibly separated: white glass, hairline border, soft shadow.
+   (Blur is tuned per usage via backdrop-blur utilities when needed.) */
+@utility glass {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-e2);
+  backdrop-filter: blur(14px) saturate(1.12);
+  -webkit-backdrop-filter: blur(14px) saturate(1.12);
+}
+
+/* Stronger glass for popovers / modals / dropdowns */
+@utility glass-strong {
+  background: var(--glass-bg-strong);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-e3);
+  backdrop-filter: blur(16px) saturate(1.12);
+  -webkit-backdrop-filter: blur(16px) saturate(1.12);
+}
+
+/* Fine mono label used for section metadata */
+@utility label-mono {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+/* Subtle paper grain for hero / footer bands */
+@utility grain {
+  position: relative;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: radial-gradient(
+      circle at 1px 1px,
+      var(--foreground) 1px,
+      transparent 0
+    );
+  background-size: 26px 26px;
+}
+
+/* Hide the native cursor when the custom cursor is active (desktop only) */
+.custom-cursor-active,
+.custom-cursor-active a,
+.custom-cursor-active button,
+.custom-cursor-active [role="button"],
+.custom-cursor-active input,
+.custom-cursor-active textarea,
+.custom-cursor-active select,
+.custom-cursor-active label {
+  cursor: none !important;
+}
+
+/* ── Aurora ambient light field — slow autonomous drift ────────────────────
+   Four huge diffused light sources behind the entire page. Movement is
+   transform-only (translate3d, compositor-friendly), 26–58s one-way legs
+   with `alternate` so nothing ever snaps or loops visibly. Each light has
+   its own duration + delay → never synchronized. The color itself never
+   changes hue; only a very slow intensity breath (0.72 → 1). */
+@keyframes aurora-drift-a {
+  from {
+    transform: translate3d(-2.5%, -1.5%, 0);
+    opacity: 0.72;
+  }
+  to {
+    transform: translate3d(3%, 2%, 0);
+    opacity: 1;
+  }
+}
+@keyframes aurora-drift-b {
+  from {
+    transform: translate3d(3%, 1.5%, 0);
+    opacity: 0.78;
+  }
+  to {
+    transform: translate3d(-3.5%, -1.2%, 0);
+    opacity: 1;
+  }
+}
+@keyframes aurora-drift-c {
+  from {
+    transform: translate3d(-1.5%, -2.5%, 0);
+    opacity: 0.75;
+  }
+  to {
+    transform: translate3d(2%, 3%, 0);
+    opacity: 1;
+  }
+}
+@keyframes aurora-drift-d {
+  from {
+    transform: translate3d(2.5%, 2%, 0);
+    opacity: 0.8;
+  }
+  to {
+    transform: translate3d(-2%, -2.5%, 0);
+    opacity: 1;
+  }
+}
+
+.aurora-light {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform, opacity;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+.aurora-a {
+  animation-name: aurora-drift-a;
+  animation-duration: 34s;
+  animation-delay: -8s;
+}
+.aurora-b {
+  animation-name: aurora-drift-b;
+  animation-duration: 42s;
+  animation-delay: -20s;
+}
+.aurora-c {
+  animation-name: aurora-drift-c;
+  animation-duration: 50s;
+  animation-delay: -31s;
+}
+.aurora-d {
+  animation-name: aurora-drift-d;
+  animation-duration: 58s;
+  animation-delay: -44s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-light {
+    animation: none !important;
+  }
+}
+
+/* ── Cinematic project reel — auto-playing screenshot sequences ────────────
+   Each card's screenshots play like a tiny product video: the visible image
+   carries a slow Ken Burns camera move (one of four zoom+drift variants)
+   while the clock advances to the next one, which dissolves in with a soft
+   blur-to-sharp entrance. Fade-over model: the outgoing image stays fully
+   opaque UNDERNEATH until the incoming one has fully arrived, so the frame
+   never dips, never flickers, and never exposes the card background. */
+.reel-layer {
+  transition: opacity 700ms ease;
+}
+.reel-layer.is-active {
+  animation: reel-enter var(--reel-enter, 900ms) cubic-bezier(0.4, 0, 0.2, 1)
+    both;
+}
+.reel-kb {
+  animation-duration: var(--reel-kb, 4400ms);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: transform;
+}
+.reel-kb-a {
+  animation-name: reel-kb-a;
+}
+.reel-kb-b {
+  animation-name: reel-kb-b;
+}
+.reel-kb-c {
+  animation-name: reel-kb-c;
+}
+.reel-kb-d {
+  animation-name: reel-kb-d;
+}
+
+/* Hover / touch / keyboard-focus pause freezes the camera mid-move — it
+   never freezes a half-finished crossfade (only Ken Burns is paused). */
+[data-paused="true"] .reel-kb {
+  animation-play-state: paused;
+}
+
+/* Camera moves — extremely subtle, always scale ≥ 1.03 so the frame is
+   never uncovered; drifts stay ≤ 1.1% (margin is 1.5% at scale 1.03). */
+@keyframes reel-kb-a {
+  from {
+    transform: scale(1.03) translate3d(-0.8%, 0.3%, 0);
+  }
+  to {
+    transform: scale(1.075) translate3d(0.9%, -0.4%, 0);
+  }
+}
+@keyframes reel-kb-b {
+  from {
+    transform: scale(1.075) translate3d(0.8%, -0.5%, 0);
+  }
+  to {
+    transform: scale(1.03) translate3d(-0.7%, 0.5%, 0);
+  }
+}
+@keyframes reel-kb-c {
+  from {
+    transform: scale(1.045) translate3d(1.1%, 0.2%, 0);
+  }
+  to {
+    transform: scale(1.03) translate3d(-1%, 0.4%, 0);
+  }
+}
+@keyframes reel-kb-d {
+  from {
+    transform: scale(1.03) translate3d(-0.4%, 0.9%, 0);
+  }
+  to {
+    transform: scale(1.07) translate3d(0.6%, -0.9%, 0);
+  }
+}
+
+/* Crossfade entrance: opacity + blur-to-sharp + a whisper of scale over
+   the outgoing frame. No `to` keyframe — it resolves to the layer's own
+   sharp, unscaled state, so nothing lingers after the animation ends. */
+@keyframes reel-enter {
+  from {
+    opacity: 0;
+    filter: blur(5px);
+    transform: scale(1.015);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reel-layer.is-active {
+    animation: none;
+  }
+  .reel-kb {
+    animation: none !important;
+  }
+}
+
+/* ── Card hover language — one interaction across every glass card ───────── */
+@utility card-lift {
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.45s ease,
+    box-shadow 0.45s ease;
+}
+.card-lift:hover {
+  transform: translateY(-5px);
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--shadow-e3);
+}
+
+/* ── Reduced motion: simplify everything ────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   LIQUID GLASS CAPSULE BUTTONS — "a small piece of blue water sealed in glass"
+   Physical construction, outside → in:
+     .lq           capsule root — clips the water, lifts on hover, presses on
+                   click; carries the full OUTER shadow stack (silhouette,
+                   contact → ambient, blue bounce) — root is NOT clipped
+     .lq-glass     glass shell — crystal/smoked body, cap light arcs, bevelled
+                   rim, wall-thickness line, inner bevel + vignette, backdrop
+                   blur (inset lighting ONLY — outer shadows would be clipped)
+     .lq-base      thick glass bottom wall in front of the water — real
+                   vessel thickness, water glows through it
+     .lq-liquid    the water mass — spring-driven, oversized, always clipped;
+                   ::before = sub-surface meniscus scatter, ::after = floor glow
+     .lq-wavebox   hover-activity wrapper (subtle scaleY) for the wave surfaces
+     .lq-wave      two seamless tiling wave surfaces, slow natural drift loop
+     .lq-caustic   refracted light patches — the water's transparent areas
+     .lq-surface   light pooling just above the waterline (rides with the mass)
+     .lq-bubbles   tiny physical bubbles (rim + specular) rising inside the liquid
+     .lq-ceiling   wide ceiling reflection along the inside of the upper glass
+     .lq-gloss     top-left / top-right specular reflections on the glass
+     .lq-glint     idle light streak drifting across the glass
+     .lq-shine     diagonal reflection sweeping across on hover
+     .lq-ripple    press ripple ring, spawned at the press point
+     .lq-content   label layer — always above the water, never tinted over
+   Glass shell extras: .lq-glass::before bevelled rim ring (directional
+   light on the border), inset wall-thickness line, layered contact→ambient
+   outer shadow stack.
+   Variants: --primary (deeper water, stronger glow) · --secondary (calmer)
+             · --chip (compact capsule) · --icon (round, small water)
+   All continuous motion is transform/opacity only — GPU compositing, 60fps.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.lq {
+  --lq-surface: 62%; /* mean waterline — water fills the lower ~38% */
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-radius: 999px;
+  -webkit-tap-highlight-color: transparent;
+  /* PHYSICAL PRESENCE — the entire OUTER shadow stack lives on the root.
+     It must be here: overflow:hidden on .lq clips .lq-glass's own outer
+     shadows (that was the flat look). Order: glass silhouette → tight
+     contact → near → blue bounce near the base → wide ambient →
+     liquid under-glow. */
+  box-shadow:
+    0 0 0 1px var(--lq-contact),
+    0 1.5px 3px -1px var(--lq-contact),
+    0 5px 12px -5px var(--lq-contact),
+    0 5px 14px -6px var(--lq-glow-rest),
+    0 14px 30px -16px var(--lq-contact),
+    0 10px 26px -12px var(--lq-glow-rest);
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease,
+    opacity 0.3s ease;
+}
+/* NOTE: no color on the root — the label ink lives on .lq-content below.
+   Unlayered declarations here would silently beat Tailwind's layered text
+   utilities and pin every capsule label to one color. */
+.lq:hover {
+  transform: translateY(-1.5px);
+  box-shadow:
+    0 0 0 1px var(--lq-contact),
+    0 2px 4px -1px var(--lq-contact),
+    0 6px 14px -5px var(--lq-contact),
+    0 6px 16px -6px var(--lq-glow-hover),
+    0 16px 34px -16px var(--lq-contact),
+    0 14px 32px -12px var(--lq-glow-hover),
+    0 0 26px -8px var(--lq-glow-hover);
+}
+.lq:active {
+  transform: translateY(0.5px) scale(0.985);
+  transition-duration: 0.12s;
+}
+.lq:disabled {
+  pointer-events: none;
+  opacity: 0.45;
+}
+.lq:focus-visible {
+  outline: none;
+}
+
+/* ── the glass shell (inset lighting only — outer shadows live on .lq) ── */
+.lq-glass {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  border: 2px solid var(--water-border);
+  /* glass body + curved cap light: two soft arcs hugging the rounded side
+     walls where light enters the glass tube, over the crystal body */
+  background:
+    radial-gradient(
+      ellipse 36px 62% at 1.8% 46%,
+      var(--lq-cap-hi),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 36px 62% at 98.2% 46%,
+      var(--lq-cap-hi),
+      transparent 72%
+    ),
+    linear-gradient(
+      180deg,
+      var(--lq-glass-hi),
+      var(--lq-glass-lo) 58%,
+      var(--btn-glass)
+    );
+  -webkit-backdrop-filter: blur(9px) saturate(1.3);
+  backdrop-filter: blur(9px) saturate(1.3);
+  box-shadow:
+    /* glass wall thickness — a crisp inner line just inside the rim */
+    inset 0 0 0 1px var(--lq-wall),
+    /* thick top edge — the wide light band across the glass tube */
+    inset 0 2px 2px var(--lq-rim-top),
+    inset 0 12px 18px -10px var(--lq-rim-top),
+    /* inner bevel — the top surface curving away under its rim light */
+    inset 0 4px 5px -4px var(--lq-inner-shade),
+    /* inner glass shadow — soft occlusion around the whole interior */
+    inset 0 0 12px -7px var(--lq-inner-shade),
+    /* thick bottom edge — cyan light refracting through the glass floor */
+    inset 0 -2px 2.5px var(--lq-rim-bottom),
+    inset 0 -14px 22px -12px var(--lq-rim-bottom);
+  transition:
+    border-color 0.3s ease;
+}
+/* bevelled rim — directional light wrapping the glass edge: bright where
+   the light source hits (top-left), water-tinted where it exits (bottom-
+   right). Painted as a 2px gradient ring exactly over the border; hidden
+   entirely if the browser lacks mask support. */
+.lq-glass::before {
+  content: "";
+  position: absolute;
+  inset: -2px; /* the padding-box offset — the ring lands on the border */
+  border-radius: inherit;
+  padding: 2px;
+  pointer-events: none;
+}
+@supports (mask-composite: exclude) or (-webkit-mask-composite: xor) {
+  .lq-glass::before {
+    background: linear-gradient(
+      148deg,
+      var(--lq-bevel-hi),
+      rgba(255, 255, 255, 0.08) 34%,
+      rgba(255, 255, 255, 0) 54%,
+      var(--lq-bevel-lo) 94%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+}
+.lq:hover .lq-glass {
+  border-color: var(--water-border-hover);
+}
+
+/* ── the water mass (the ONLY layer the spring simulation moves) ─────────── */
+.lq-liquid {
+  position: absolute;
+  left: -40%;
+  width: 180%; /* oversized: spring displacement can never reveal a gap */
+  top: calc(var(--lq-surface) - 7px);
+  bottom: -35%;
+  z-index: 1;
+  pointer-events: none;
+  will-change: transform;
+  transition: opacity 0.45s ease;
+  opacity: 1;
+}
+
+/* bright scatter just under the waterline — light penetrating the surface
+   and glowing in the top millimetre of the water (rides with the mass) */
+.lq-liquid::before {
+  content: "";
+  position: absolute;
+  left: 2%;
+  right: 2%;
+  top: calc(20% + 2px);
+  height: 22%;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(180deg, var(--lq-meniscus), transparent 92%);
+  mix-blend-mode: screen;
+  opacity: 0.45;
+  filter: blur(1px);
+}
+
+/* depth glow at the base of the water — light exiting through the glass
+   floor. The capsule clips whatever dips below its bottom edge, so the
+   glow always reads as hugging the floor on every variant. */
+.lq-liquid::after {
+  content: "";
+  position: absolute;
+  left: 3%;
+  right: 3%;
+  top: 47%;
+  height: 16%;
+  z-index: 2;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at 50% 100%,
+    var(--lq-floor),
+    transparent 74%
+  );
+  mix-blend-mode: screen;
+  opacity: 0.8;
+}
+
+/* ── the thick glass base wall ────────────────────────────────────────────
+   The bottom of the tube seen IN FRONT of the water: a translucent band of
+   the same glass material that the water and its floor glow shine through.
+   This is what makes the capsule read as a vessel with real thickness
+   instead of a blue gradient with a border. */
+.lq-base {
+  position: absolute;
+  left: 1.5%;
+  right: 1.5%;
+  bottom: 1.5%;
+  height: 21%;
+  z-index: 2;
+  border-radius: 999px;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.12) 14%,
+    var(--btn-glass) 46%,
+    var(--btn-glass) 100%
+  );
+  box-shadow:
+    /* the base wall's own lit bottom edge — light exiting the tube */
+    inset 0 -2px 3px var(--lq-rim-bottom),
+    /* the step where the base meets the water catches light */
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+/* refracted light patches drifting INSIDE the water — the transparent
+   areas that make the liquid read as real water, not tinted glass.
+   Blend is scoped to the liquid's own stacking context, so it lightens
+   only the waves beneath it, never the page behind the button. */
+.lq-caustic {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0.62;
+  background:
+    radial-gradient(
+      ellipse 32% 62% at 26% 34%,
+      var(--lq-caustic),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 26% 58% at 71% 52%,
+      var(--lq-caustic),
+      transparent 74%
+    );
+  animation: lq-caustic-drift 13s ease-in-out infinite alternate;
+  transition: opacity 0.45s ease;
+}
+.lq:hover .lq-caustic {
+  opacity: 0.8;
+}
+
+.lq-wavebox {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 0;
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.lq:hover .lq-wavebox {
+  transform: scaleY(1.18); /* the wave breathes harder on hover */
+}
+
+.lq-wave {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  display: block;
+}
+.lq-wave--a {
+  animation: lq-wave-a 10s linear infinite;
+}
+.lq-wave--b {
+  animation: lq-wave-b 15s linear infinite;
+  opacity: 0.5;
+}
+
+/* light pooled just above the waterline */
+.lq-surface {
+  position: absolute;
+  top: calc(20% - 4px);
+  left: 10%;
+  right: 10%;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    var(--water-highlight),
+    transparent 72%
+  );
+  filter: blur(2px);
+  opacity: 0.7;
+  transition: opacity 0.45s ease;
+}
+.lq:hover .lq-surface {
+  opacity: 1;
+}
+
+/* tiny bubbles rising inside the liquid — physical bubbles: transparent
+   core, bright refracting rim, one small specular highlight */
+.lq-bubbles span {
+  position: absolute;
+  border-radius: 50%;
+  background:
+    radial-gradient(
+      circle at 32% 28%,
+      rgba(255, 255, 255, 0.95),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      transparent 44%,
+      var(--lq-bubble) 62%,
+      transparent 76%
+    );
+  opacity: 0;
+  animation: lq-bubble 8s ease-in-out infinite;
+}
+.lq-bubbles span:nth-child(1) {
+  left: 22%;
+  bottom: 12%;
+  width: 5px;
+  height: 5px;
+  animation-delay: 0.4s;
+}
+.lq-bubbles span:nth-child(2) {
+  left: 48%;
+  bottom: 7%;
+  width: 4px;
+  height: 4px;
+  animation-delay: 3.1s;
+  animation-duration: 9.5s;
+}
+.lq-bubbles span:nth-child(3) {
+  left: 66%;
+  bottom: 16%;
+  width: 6px;
+  height: 6px;
+  animation-delay: 5.6s;
+  animation-duration: 11s;
+}
+.lq-bubbles span:nth-child(4) {
+  left: 82%;
+  bottom: 9%;
+  width: 4px;
+  height: 4px;
+  animation-delay: 7.8s;
+  animation-duration: 8.6s;
+}
+
+/* ── specular glass reflections ──────────────────────────────────────────── */
+.lq-gloss {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0.85;
+  transition: opacity 0.4s ease;
+}
+.lq:hover .lq-gloss {
+  opacity: 1;
+}
+.lq-gloss::before,
+.lq-gloss::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(1.5px);
+}
+.lq-gloss::before {
+  left: 6%;
+  top: 8%;
+  width: 40%;
+  height: 44%;
+  background: radial-gradient(
+    ellipse at 30% 15%,
+    var(--lq-gloss),
+    transparent 66%
+  );
+  /* the main reflection breathes — glass light is never fully still */
+  animation: lq-gloss-drift 11s ease-in-out infinite alternate;
+}
+.lq-gloss::after {
+  right: 7%;
+  top: 10%;
+  width: 26%;
+  height: 34%;
+  background: radial-gradient(
+    ellipse at 70% 15%,
+    var(--lq-gloss),
+    transparent 66%
+  );
+  opacity: 0.75;
+  animation: lq-gloss-drift-b 14s ease-in-out infinite alternate;
+}
+
+/* wide ceiling reflection — soft horizontal light pooled along the inside
+   of the upper glass, like a bright window reflected in a glass tube */
+.lq-ceiling {
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  top: 6.5%;
+  height: 32%;
+  z-index: 2;
+  border-radius: 999px;
+  pointer-events: none;
+  background: linear-gradient(180deg, var(--lq-ceiling), transparent 86%);
+  filter: blur(1px);
+  opacity: 0.75;
+  transition: opacity 0.4s ease;
+}
+.lq:hover .lq-ceiling {
+  opacity: 1;
+}
+
+/* idle glint — a soft light drifting across the glass, always alive */
+.lq-glint {
+  position: absolute;
+  top: 12%;
+  bottom: 12%;
+  left: 0;
+  width: 22%;
+  z-index: 3;
+  border-radius: 999px;
+  transform: translateX(-60%) skewX(-14deg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--lq-sheen) 48%,
+    var(--lq-sheen) 52%,
+    transparent
+  );
+  opacity: 0.16;
+  animation: lq-glint-drift 9s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* hover reflection sweep */
+.lq-shine {
+  position: absolute;
+  top: -30%;
+  bottom: -30%;
+  left: 0;
+  width: 30%;
+  z-index: 3;
+  transform: translateX(-140%) skewX(-18deg);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--lq-sheen) 46%,
+    var(--lq-sheen) 54%,
+    transparent
+  );
+  opacity: 0.18;
+  transition:
+    transform 1.15s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.35s ease;
+  pointer-events: none;
+}
+.lq:hover .lq-shine {
+  transform: translateX(430%) skewX(-18deg);
+  opacity: 0.32;
+}
+
+/* press ripple ring */
+.lq-ripple {
+  position: absolute;
+  z-index: 5;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border-radius: 50%;
+  border: 1.5px solid var(--water-highlight);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.3),
+    transparent 62%
+  );
+  pointer-events: none;
+  animation: lq-ripple 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* label layer — always above the water and reflections.
+   The ink lives HERE (not on the root) so it applies uniformly: navy on
+   crystal (light), ice white on smoked glass (dark). The relief shadow
+   seats the letters ON the glass surface instead of floating over it. */
+.lq-content {
+  position: relative;
+  z-index: 6;
+  color: var(--water-ink);
+  text-shadow: var(--lq-ink-relief);
+}
+/* a selected capsule tints its label with the readable brand accent
+   (bronze on cream / champagne on navy) — the risen water marks the state */
+.lq.is-active .lq-content {
+  color: var(--accent-deep);
+}
+
+/* ── variant tuning: waterline depth + emphasis ──────────────────────────── */
+.lq--primary {
+  --lq-surface: 60%;
+}
+.lq--secondary {
+  --lq-surface: 66%;
+}
+.lq--secondary .lq-liquid {
+  opacity: 0.95;
+}
+.lq--secondary:hover .lq-liquid {
+  opacity: 1;
+}
+.lq--chip {
+  --lq-surface: 62%; /* a clearly visible thin blue liquid layer */
+}
+.lq--chip .lq-liquid {
+  opacity: 1;
+}
+.lq--chip:hover .lq-liquid {
+  opacity: 1;
+}
+.lq--icon {
+  --lq-surface: 60%;
+}
+
+/* selected-state emphasis for glass capsules that must read as ON */
+.lq.is-active {
+  --lq-surface: 55%; /* the water rises when a filter is engaged */
+}
+.lq.is-active .lq-liquid {
+  opacity: 1;
+}
+.lq.is-active .lq-glass {
+  border-color: var(--water-border-hover);
+}
+
+/* ── keyframes (transform / opacity only) ────────────────────────────────── */
+@keyframes lq-wave-a {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+@keyframes lq-wave-b {
+  from {
+    transform: translate3d(-50%, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes lq-bubble {
+  0% {
+    transform: translate3d(0, 4px, 0);
+    opacity: 0;
+  }
+  18% {
+    opacity: 0.75;
+  }
+  82% {
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate3d(3px, -20px, 0);
+    opacity: 0;
+  }
+}
+
+/* refracted light patches sliding through the liquid body */
+@keyframes lq-caustic-drift {
+  from {
+    transform: translate3d(-2.5%, 1.5%, 0) scale(1);
+    opacity: 0.42;
+  }
+  to {
+    transform: translate3d(3%, -2%, 0) scale(1.06);
+    opacity: 0.62;
+  }
+}
+
+/* the fixed speculars sway almost imperceptibly — living glass */
+@keyframes lq-gloss-drift {
+  from {
+    transform: translateX(-3%) rotate(-16deg);
+  }
+  to {
+    transform: translateX(3.5%) rotate(-13deg);
+  }
+}
+@keyframes lq-gloss-drift-b {
+  from {
+    transform: translateX(2.5%) rotate(14deg);
+  }
+  to {
+    transform: translateX(-3%) rotate(16.5deg);
+  }
+}
+@keyframes lq-glint-drift {
+  0%,
+  100% {
+    transform: translateX(-60%) skewX(-14deg);
+    opacity: 0.1;
+  }
+  50% {
+    transform: translateX(420%) skewX(-14deg);
+    opacity: 0.22;
+  }
+}
+@keyframes lq-ripple {
+  from {
+    transform: scale(0.5);
+    opacity: 0.85;
+  }
+  to {
+    transform: scale(5);
+    opacity: 0;
+  }
+}
+
+/* lq token refresh */
+
+/* lq ink refresh */
